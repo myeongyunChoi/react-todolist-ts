@@ -15,6 +15,25 @@ export default function Todo() {
       },
     ]);
   };
+
+  const toggleTodo = (id: number) => {
+    setTodos((todos) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
+  const deleteTodo = (id: number) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  };
+
+  const modifyTodo = (id: number, text: string) => {
+    setTodos((todos) =>
+      todos.map((todo) => (todo.id === id ? { ...todo, text: text } : todo)),
+    );
+  };
+
   return (
     <>
       <div className="todo">
@@ -22,7 +41,12 @@ export default function Todo() {
         {/* <!-- 할 일 등록 --> */}
         <TodoEditor addTodo={addTodo} />
         {/* <!-- 할 일 목록 --> */}
-        <TodoList />
+        <TodoList
+          todos={todos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+          modifyTodo={modifyTodo}
+        />
       </div>
     </>
   );

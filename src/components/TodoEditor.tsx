@@ -1,14 +1,11 @@
 import { useState } from "react";
 import Input from "./html/Input";
 
-export default function TodoEditor({
-  addTodo,
-}: {
-  addTodo: (text: string) => void;
-}) {
+export default function TodoEditor({ addTodo }: TodoEditorProps) {
   const [text, setText] = useState("");
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!text.trim()) return;
     addTodo(text);
     setText("");
   };
