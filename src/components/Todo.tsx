@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoEditor from "./TodoEditor";
 import TodoList from "./TodoList";
 import TotoHeader from "./TotoHeader";
 
 export default function Todo() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(
+    JSON.parse(localStorage.getItem("todos") || "[]"),
+  );
   const addTodo = (text: string) => {
     setTodos((todos) => [
       ...todos,
@@ -33,6 +35,10 @@ export default function Todo() {
       todos.map((todo) => (todo.id === id ? { ...todo, text: text } : todo)),
     );
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <>
