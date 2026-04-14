@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "./html/Button";
 import Checkbox from "./html/Checkbox";
 import Input from "./html/Input";
 import SvgClose from "./svg/SvgClose";
 import SvgPencil from "./svg/SvgPencil";
 
-export default function TodoListItem({
+export default React.memo(function TodoListItem({
   todo,
   toggleTodo,
   deleteTodo,
@@ -66,4 +66,4 @@ export default function TodoListItem({
       </li>
     </>
   );
-}
+});
